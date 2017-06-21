@@ -1,5 +1,7 @@
 #include <Arduino.h>
 
+#define DEBUG 1
+
 const int pinLed = 13;
 const int pinSalida = 3;
 const int pinCrucex0 = 2;
@@ -20,22 +22,25 @@ void cruce(){
 }
 
 void setup(){
-  Serial.begin(9600);
+  if(DEBUG){Serial.begin(9600);}
   pinMode(pinSalida,OUTPUT);
   pinMode(pinCrucex0, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(pinCrucex0), cruce, RISING);
 }
 
 void loop(){
-  Serial.print("f: ");
-  Serial.println(f);
-  Serial.print("T: ");
-  Serial.println(T);
-  Serial.print("alpha: ");
-  Serial.println(alpha);
-  Serial.print("alphaMicroseconds: ");
-  Serial.println(alphaMicroseconds);
-  Serial.print("anchoPulso: ");
-  Serial.println(anchoPulso);
-  delay(1000);
+  if(DEBUG){
+    Serial.println("=================================");
+    Serial.print("f: ");
+    Serial.println(f);
+    Serial.print("T: ");
+    Serial.println(T);
+    Serial.print("alpha: ");
+    Serial.println(alpha);
+    Serial.print("alphaMicroseconds: ");
+    Serial.println(alphaMicroseconds);
+    Serial.print("anchoPulso: ");
+    Serial.println(anchoPulso);
+    delay(1000);
+  }
 }
