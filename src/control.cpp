@@ -4,7 +4,7 @@
 
 const int S1_S2 = 4;
 const int S3_S4 = 5;
-const int S5_S5 = 6;
+const int S5_S6 = 6;
 
 const int pinLed = 13;
 const int pinSalida = 3;
@@ -14,6 +14,7 @@ const int f = 60;
 const float DaG = float(180)/float(1023); //Digital a Grados
 const float DaMicros = float(1)/float(1023); //Digital a microsegundos
 const float DIF_PULSOS_GRADOS=60;
+const float CAMBIO_FASE_GRADOS=30;
 
 /* Estados */
 const short ESPERAR_ALFA = 0;
@@ -27,6 +28,8 @@ long ultimo_t0;
 long ultimo_t1;
 long actual_t0;
 long actual_t1;
+long ultimo_t2_cruce;
+long ultimo_t3_cruce;
 
 /* Trifasica */
 int senales[6]; // Secuencia: ACN - CNB - ANB - ANC - CBN - ABN
@@ -41,6 +44,7 @@ int alfa = 10; //Valor entre 0 y 180
 float alfaMicroseconds; //valor en us
 float anchoPulso = 0.07*T; // Valor en us
 float dif_pulsos_us=(DIF_PULSOS_GRADOS/float(360*60))*1000000;
+float cambio_fase_us = (CAMBIO_FASE_GRADOS/float(f*360))*1000000;
 
 void apagar_todo(){
   for(int i = 0; i < 6;i++){
@@ -63,11 +67,9 @@ void cruce(){
   actual_t1 = micros();
   /*Aseguramos que solo tome el cruce de un semiciclo*/
   if(actual_t1-ultimo_t1>T*1.5){
-    apagar_todo();
     ultimo_t1 = micros();
     cruce_detectado = true;
-    estado = ESPERAR_ALFA;
-    ultimo_t0=micros();
+    // ultimo_t0=micros();
   }
 }
 
@@ -77,6 +79,9 @@ void setup(){
   #endif
   pinMode(pinSalida,OUTPUT);
   pinMode(pinCrucex0, INPUT_PULLUP);
+  pinMode(S1_S2,OUTPUT);
+  pinMode(S3_S4,OUTPUT);
+  pinMode(S5_S6,OUTPUT);
   for(int i = 0; i < 6; i++){
     pinMode(pines_senales[i],OUTPUT);
   }
@@ -104,6 +109,8 @@ void loop(){
   boolean cruce_detectado_copia = cruce_detectado;
   interrupts();
 
+  float alfa_real_us = cambio_fase_us+alfaMicroseconds;
+
   if(cruce_detectado_copia){
     actual_t0 = micros();
     int prox_senal = obtener_prox_senal(senal_actual);
@@ -112,7 +119,7 @@ void loop(){
 
       /*Una vez que llegue al alfa, escribir las dos señales en alto*/
       case ESPERAR_ALFA:
-        if(actual_t0 - ultimo_t0 > alfaMicroseconds){
+        if(actual_t0 - ultimo_t1 > alfa_real_us){
           senales [senal_actual] = HIGH;
           senales [prox_senal] = HIGH;
           digitalWrite(pines_senales[senal_actual],HIGH);
@@ -153,15 +160,27 @@ void loop(){
 
       case APAGAR:
         /* Salir */
-        cruce_detectado=false;
-        estado = ESPERAR_ALFA;
+        if(actual_t0-ultimo_t1<T*1.5){
+          estado = ESPERAR_ALFA;
+        }else{
+          cruce_detectado=false;
+        }
         break;
 
       default:
-        cruce_detectado=false;
+        // cruce_detectado=false;
         break;
     }
   }
+
+  int valor_S1_S2 = senales[0] | senales[3];
+  int valor_S3_S4 = senales[2] | senales[5];
+  int valor_S5_S6 = senales[1] | senales[4];
+
+  digitalWrite(S1_S2, valor_S1_S2);
+  digitalWrite(S3_S4, valor_S3_S4);
+  digitalWrite(S5_S6, valor_S5_S6);
+
 
   //====================================================
   #if DEBUG
