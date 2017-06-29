@@ -7,14 +7,13 @@ const int S3_S4 = 5;
 const int S5_S6 = 6;
 
 const int pinLed = 13;
-const int pinSalida = 3;
 const int pinCrucex0 = 2;
 const int pinAlfa = A0; //Entrada del potenciómetro que medirá el ángulo alfa
 const int f = 60;
 const float DaG = float(180)/float(1023); //Digital a Grados
 const float DaMicros = float(1)/float(1023); //Digital a microsegundos
 const float DIF_PULSOS_GRADOS=60;
-const float CAMBIO_FASE_GRADOS=30;
+const float CAMBIO_FASE_GRADOS=35; //30 + 5 grados de tolerancia
 
 /* Estados */
 const short ESPERAR_ALFA = 0;
@@ -46,15 +45,6 @@ float anchoPulso = 0.07*T; // Valor en us
 float dif_pulsos_us=(DIF_PULSOS_GRADOS/float(360*60))*1000000;
 float cambio_fase_us = (CAMBIO_FASE_GRADOS/float(f*360))*1000000;
 
-void apagar_todo(){
-  for(int i = 0; i < 6;i++){
-    if(senales [i] != LOW){
-      senales[i]=LOW;
-      digitalWrite(pines_senales[i], LOW);
-    }
-  }
-}
-
 int obtener_prox_senal(int s){
   if(s >= 5){
     return 0;
@@ -77,7 +67,6 @@ void setup(){
   #if DEBUG
     Serial.begin(9600);
   #endif
-  pinMode(pinSalida,OUTPUT);
   pinMode(pinCrucex0, INPUT_PULLUP);
   pinMode(S1_S2,OUTPUT);
   pinMode(S3_S4,OUTPUT);
@@ -85,7 +74,7 @@ void setup(){
   for(int i = 0; i < 6; i++){
     pinMode(pines_senales[i],OUTPUT);
   }
-  attachInterrupt(digitalPinToInterrupt(pinCrucex0), cruce, RISING);
+  attachInterrupt(digitalPinToInterrupt(pinCrucex0), cruce, FALLING);
   ultimo_t1 = micros();
 }
 
@@ -93,16 +82,14 @@ void loop(){
   noInterrupts();
   valorAlfaSensado = analogRead(pinAlfa);
   interrupts();
-  #if DEBUG
-    /*Solo se usa para comprobar ciertos valores en comunicación serial*/
-    alfa = valorAlfaSensado*DaG;
-    alfaMicroseconds = T*alfa/180;
-  #else
-    /*Las dos lineas anteriores se pueden reducir a la siguiente*/
-    alfaMicroseconds = T*valorAlfaSensado*DaMicros;
-  #endif
 
-  if(alfaMicroseconds>T-500){alfaMicroseconds = T - 500;}
+
+  alfa = valorAlfaSensado*DaG;
+
+  if(alfa > 111){
+    alfa = 111;
+  }
+  alfaMicroseconds = T*alfa/180;
 
   /* Calcular*/
   noInterrupts();
