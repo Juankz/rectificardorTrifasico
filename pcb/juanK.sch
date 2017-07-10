@@ -21990,10 +21990,10 @@ Source: www.kingbright.com</description>
 </variantdefs>
 <classes>
 <class number="0" name="default" width="0.508" drill="0.508">
-<clearance class="0" value="0.508"/>
+<clearance class="0" value="1.016"/>
 </class>
 <class number="1" name="power" width="0.762" drill="0.762">
-<clearance class="1" value="0.762"/>
+<clearance class="1" value="2.54"/>
 </class>
 </classes>
 <parts>

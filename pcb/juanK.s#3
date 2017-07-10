@@ -20602,7 +20602,7 @@ Grid 5.00 mm&lt;p&gt;
 <instance part="C3" gate="G$1" x="-91.44" y="30.48" rot="R180"/>
 <instance part="S2" gate="1" x="-71.12" y="71.12"/>
 <instance part="GND6" gate="1" x="-73.66" y="55.88" rot="R270"/>
-<instance part="R2" gate="G$1" x="-10.16" y="60.96" rot="R180"/>
+<instance part="R2" gate="G$1" x="-10.16" y="60.96" rot="MR0"/>
 <instance part="R3" gate="G$1" x="-165.1" y="45.72" rot="R270"/>
 <instance part="R4" gate="G$1" x="-175.26" y="55.88"/>
 <instance part="R5" gate="G$1" x="-195.58" y="55.88"/>
@@ -20759,11 +20759,6 @@ Grid 5.00 mm&lt;p&gt;
 <wire x1="-195.58" y1="83.82" x2="-175.26" y2="83.82" width="0.1524" layer="91"/>
 </segment>
 <segment>
-<pinref part="R2" gate="G$1" pin="E"/>
-<wire x1="-10.16" y1="55.88" x2="-10.16" y2="53.34" width="0.1524" layer="91"/>
-<pinref part="GND7" gate="1" pin="GND"/>
-</segment>
-<segment>
 <pinref part="SL2" gate="G$1" pin="4"/>
 <pinref part="GND8" gate="1" pin="GND"/>
 <wire x1="5.08" y1="10.16" x2="5.08" y2="12.7" width="0.1524" layer="91"/>
@@ -20780,6 +20775,11 @@ Grid 5.00 mm&lt;p&gt;
 <pinref part="JP14" gate="G$1" pin="1"/>
 <wire x1="-134.62" y1="5.08" x2="-142.24" y2="5.08" width="0.1524" layer="91"/>
 <junction x="-134.62" y="5.08"/>
+</segment>
+<segment>
+<pinref part="R2" gate="G$1" pin="A"/>
+<pinref part="GND7" gate="1" pin="GND"/>
+<wire x1="-10.16" y1="55.88" x2="-10.16" y2="53.34" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$14" class="0">
@@ -20859,10 +20859,9 @@ Grid 5.00 mm&lt;p&gt;
 <label x="-137.16" y="99.06" size="1.778" layer="95" rot="R180"/>
 </segment>
 <segment>
-<pinref part="R2" gate="G$1" pin="A"/>
-<wire x1="-10.16" y1="66.04" x2="-10.16" y2="73.66" width="0.1524" layer="91"/>
-<label x="-10.16" y="71.12" size="1.778" layer="95"/>
-<label x="-10.16" y="71.12" size="1.778" layer="95"/>
+<pinref part="R2" gate="G$1" pin="E"/>
+<wire x1="-10.16" y1="66.04" x2="-10.16" y2="68.58" width="0.1524" layer="91"/>
+<label x="-10.16" y="68.58" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$1" class="0">
