@@ -21990,10 +21990,10 @@ Source: www.kingbright.com</description>
 </variantdefs>
 <classes>
 <class number="0" name="default" width="0.508" drill="0.508">
-<clearance class="0" value="0.508"/>
+<clearance class="0" value="0.889"/>
 </class>
 <class number="1" name="power" width="0.762" drill="0.762">
-<clearance class="1" value="0.762"/>
+<clearance class="1" value="2.54"/>
 </class>
 </classes>
 <parts>
@@ -22093,6 +22093,7 @@ Source: www.kingbright.com</description>
 <part name="LED1" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="3MM"/>
 <part name="R20" library="rcl" deviceset="R-EU_" device="0204/5"/>
 <part name="GND11" library="supply1" deviceset="GND" device=""/>
+<part name="GND12" library="supply1" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -22197,6 +22198,7 @@ Source: www.kingbright.com</description>
 <instance part="LED1" gate="G$1" x="-139.7" y="81.28"/>
 <instance part="R20" gate="G$1" x="-139.7" y="91.44" rot="R90"/>
 <instance part="GND11" gate="1" x="-139.7" y="71.12"/>
+<instance part="GND12" gate="1" x="43.18" y="10.16"/>
 </instances>
 <busses>
 </busses>
@@ -22296,6 +22298,14 @@ Source: www.kingbright.com</description>
 <pinref part="LED1" gate="G$1" pin="C"/>
 <pinref part="GND11" gate="1" pin="GND"/>
 <wire x1="-139.7" y1="73.66" x2="-139.7" y2="76.2" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="D10" gate="1" pin="A"/>
+<pinref part="OK5" gate="-1" pin="C"/>
+<wire x1="43.18" y1="15.24" x2="43.18" y2="12.7" width="0.1524" layer="91"/>
+<wire x1="43.18" y1="12.7" x2="48.26" y2="12.7" width="0.1524" layer="91"/>
+<pinref part="GND12" gate="1" pin="GND"/>
+<junction x="43.18" y="12.7"/>
 </segment>
 </net>
 <net name="N$14" class="0">
@@ -22877,14 +22887,6 @@ Source: www.kingbright.com</description>
 <wire x1="43.18" y1="-7.62" x2="43.18" y2="-10.16" width="0.1524" layer="91"/>
 <pinref part="OK6" gate="-1" pin="C"/>
 <wire x1="43.18" y1="-10.16" x2="48.26" y2="-10.16" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$39" class="0">
-<segment>
-<pinref part="D10" gate="1" pin="A"/>
-<pinref part="OK5" gate="-1" pin="C"/>
-<wire x1="43.18" y1="15.24" x2="43.18" y2="12.7" width="0.1524" layer="91"/>
-<wire x1="43.18" y1="12.7" x2="48.26" y2="12.7" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="GND1" class="0">

@@ -20599,7 +20599,6 @@ Grid 5.00 mm&lt;p&gt;
 <part name="D2" library="diode" deviceset="1N4004" device=""/>
 <part name="D3" library="diode" deviceset="1N4004" device=""/>
 <part name="D4" library="diode" deviceset="1N4004" device=""/>
-<part name="J1" library="con-lstb" library_urn="urn:adsk.eagle:library:162" deviceset="MA03-1" device=""/>
 <part name="D5" library="diode" deviceset="1N4004" device=""/>
 <part name="IC2" library="linear" deviceset="78*" device="TV" technology="05"/>
 <part name="C5" library="rcl" library_urn="urn:adsk.eagle:library:334" deviceset="CPOL-EU" device="E5-10.5"/>
@@ -20669,6 +20668,7 @@ Grid 5.00 mm&lt;p&gt;
 <part name="JP24" library="pinhead" library_urn="urn:adsk.eagle:library:325" deviceset="PINHD-1X1" device=""/>
 <part name="SUPPLY2" library="supply2" deviceset="GND1" device=""/>
 <part name="X1" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" deviceset="W237-102" device=""/>
+<part name="X2" library="con-wago-500" library_urn="urn:adsk.eagle:library:195" deviceset="W237-102" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -20699,7 +20699,6 @@ Grid 5.00 mm&lt;p&gt;
 <instance part="D2" gate="1" x="-223.52" y="43.18" rot="R90"/>
 <instance part="D3" gate="1" x="-241.3" y="43.18" rot="R90"/>
 <instance part="D4" gate="1" x="-241.3" y="55.88" rot="R90"/>
-<instance part="J1" gate="G$1" x="-231.14" y="58.42" rot="R270"/>
 <instance part="D5" gate="1" x="-205.74" y="93.98"/>
 <instance part="IC2" gate="A1" x="-175.26" y="93.98"/>
 <instance part="C5" gate="G$1" x="-195.58" y="88.9"/>
@@ -20770,6 +20769,8 @@ Grid 5.00 mm&lt;p&gt;
 <instance part="SUPPLY2" gate="G$1" x="215.9" y="119.38"/>
 <instance part="X1" gate="-1" x="-233.68" y="45.72" rot="R90"/>
 <instance part="X1" gate="-2" x="-228.6" y="45.72" rot="R90"/>
+<instance part="X2" gate="-1" x="134.62" y="121.92" rot="R90"/>
+<instance part="X2" gate="-2" x="139.7" y="121.92" rot="R90"/>
 </instances>
 <busses>
 </busses>
@@ -21012,12 +21013,10 @@ Grid 5.00 mm&lt;p&gt;
 <pinref part="D3" gate="1" pin="C"/>
 <pinref part="D4" gate="1" pin="A"/>
 <wire x1="-241.3" y1="45.72" x2="-241.3" y2="50.8" width="0.1524" layer="91"/>
-<pinref part="J1" gate="G$1" pin="1"/>
 <wire x1="-241.3" y1="50.8" x2="-241.3" y2="53.34" width="0.1524" layer="91"/>
 <wire x1="-233.68" y1="50.8" x2="-241.3" y2="50.8" width="0.1524" layer="91"/>
 <junction x="-241.3" y="50.8"/>
 <pinref part="X1" gate="-1" pin="KL"/>
-<junction x="-233.68" y="50.8"/>
 </segment>
 </net>
 <net name="N$11" class="0">
@@ -21027,10 +21026,8 @@ Grid 5.00 mm&lt;p&gt;
 <wire x1="-223.52" y1="45.72" x2="-223.52" y2="50.8" width="0.1524" layer="91"/>
 <wire x1="-223.52" y1="50.8" x2="-223.52" y2="53.34" width="0.1524" layer="91"/>
 <junction x="-223.52" y="50.8"/>
-<pinref part="J1" gate="G$1" pin="3"/>
 <wire x1="-228.6" y1="50.8" x2="-223.52" y2="50.8" width="0.1524" layer="91"/>
 <pinref part="X1" gate="-2" pin="KL"/>
-<junction x="-228.6" y="50.8"/>
 </segment>
 </net>
 <net name="N$3" class="0">
@@ -21145,6 +21142,8 @@ Grid 5.00 mm&lt;p&gt;
 <pinref part="J2" gate="G$1" pin="3"/>
 <wire x1="139.7" y1="127" x2="147.32" y2="127" width="0.1524" layer="91"/>
 <wire x1="139.7" y1="137.16" x2="139.7" y2="127" width="0.1524" layer="91"/>
+<pinref part="X2" gate="-2" pin="KL"/>
+<junction x="139.7" y="127"/>
 </segment>
 </net>
 <net name="C" class="0">
@@ -21237,6 +21236,8 @@ Grid 5.00 mm&lt;p&gt;
 <junction x="124.46" y="121.92"/>
 <pinref part="JP16" gate="G$1" pin="1"/>
 <junction x="124.46" y="116.84"/>
+<pinref part="X2" gate="-1" pin="KL"/>
+<junction x="134.62" y="127"/>
 </segment>
 </net>
 <net name="N$6" class="0">
